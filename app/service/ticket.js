@@ -1,5 +1,6 @@
 'use strict';
 const Service = require('egg').Service;
+const sha1 = require('sha1');
 
 const api = {
   js_ticket: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket',
@@ -69,6 +70,48 @@ class TicketService extends Service {
     } else {
       return false;
       /* eslint-enable */
+    }
+  }
+
+  sign(ticket, url) {
+    const noncestr = createNonce();
+    const timestamp = createTimestamp();
+    const signature = signIt(noncestr, ticket, timestamp, url);
+    return {
+      noncestr,
+      timestamp,
+      signature,
+    };
+
+    function signIt(noncestr, ticket, timestamp, url) {
+      const ret = {
+        jsapi_ticket: ticket,
+        nonceStr: noncestr,
+        timestamp,
+        url,
+      };
+      const string = raw(ret);
+      const sha = sha1(string);
+      return sha;
+    }
+    function createNonce() {
+      return Math.random().toString(36).substr(2, 15);
+    }
+    function createTimestamp() {
+      return parseInt(new Date().getTime() / 1000, 0) + '';
+    }
+    function raw(args) {
+      let keys = Object.keys(args);
+      let newArgs = {};
+      let str = '';
+      keys = keys.sort();
+      keys.forEach(key => {
+        newArgs[key.toLowerCase()] = args[key];
+      });
+      for (let k in newArgs) {
+        str += '&' + k + '=' + newArgs[k];
+      }
+      return str.substr(1);
     }
   }
 }

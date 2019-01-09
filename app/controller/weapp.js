@@ -35,19 +35,29 @@ class WeappController extends Controller {
       const ticket = await ctx.service.ticket.getTicket(token.access_token);
       if (ticket.errcode !== 0) {
         this.ctx.body = {
-          step: 'getTicket',
+          step: 'getTicketError',
           res_code: ticket.errcode,
           res_msg: ticket.errmsg,
         };
       } else {
-        this.ctx.body = {
-          res_code: 0,
-          res_msg: 'success',
-          data: {
-            ticket: ticket.ticket,
-            expires_in: ticket.expires_in,
-          },
-        };
+        const currUrl = ctx.query.url;
+        if (currUrl) {
+          const wxinfo = ctx.service.ticket.sign(ticket.ticket, currUrl);
+          this.ctx.body = {
+            res_code: 0,
+            res_msg: 'success',
+            data: wxinfo,
+          };
+        } else {
+          this.ctx.body = {
+            res_code: 0,
+            res_msg: 'success',
+            data: {
+              ticket: ticket.ticket,
+              expires_in: ticket.expires_in,
+            },
+          };
+        }
       }
     }
   }
