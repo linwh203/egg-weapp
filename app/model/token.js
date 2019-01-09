@@ -4,9 +4,9 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
 
-  const TicketSchema = new Schema({
+  const TokenSchema = new Schema({
     name: { type: String },
-    ticket: { type: String },
+    access_token: { type: String },
     expires_in: { type: Number },
     meta: {
       createdAt: {
@@ -20,7 +20,7 @@ module.exports = app => {
     },
   });
 
-  TicketSchema.pre('save', function(next) {
+  TokenSchema.pre('save', function(next) {
     if (this.isNew) {
       this.meta.createdAt = this.meta.updatedAt = Date.now();
     } else {
@@ -29,5 +29,5 @@ module.exports = app => {
     next();
   });
 
-  return mongoose.model('Ticket', TicketSchema);
+  return mongoose.model('Token', TokenSchema);
 };

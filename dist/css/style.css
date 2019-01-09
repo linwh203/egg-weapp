@@ -1,0 +1,143 @@
+@charset="utf-8";
+
+body,h1,h2,h3,h4,h5,h6,p,ul,li,ol,img,dl,dd,dt,input{margin: 0;padding: 0;}
+ul{list-style: none;}
+a{text-decoration: none;}
+img,input{border: none;}
+body{font-family: microsoft yahei,arial;}
+html,body{height: 100%;}
+.clear{clear:both;}
+
+/* banner滚动部分 */
+.banner {position: relative;overflow: hidden;}
+.banner .pic{width: 400%;animation:banner 10s infinite;}
+.banner .pic img{width: 25%;float: left;}
+@keyframes banner{
+	0%,20%{margin-left: 0%}
+	33.3%,53.3%{margin-left: -100%}
+	66.6%,86.6%{margin-left: -200%}
+	100%{margin-left: -300%}
+}
+
+/* 头部导航部分 */
+.banner nav{position: absolute;top:0;width: 100%;margin: 1%;}
+.banner nav .logo{float: left;width: 118px;transition:all 1s;}
+.banner nav .logo img{width: 100%;}
+
+
+.banner nav .gui {width:100%;height: 50px; text-align: center;}
+.banner nav .gui li{display:inline-block;line-height: 50px;height: 50px;padding: 0 1%;}
+.banner nav .gui li a{font-size: 13px;color: #000;text-transform: uppercase;display:block;}
+.banner nav .gui .active{color: #e0a240;}
+.banner nav .gui li a:hover{color: #e0a240;}
+.banner nav .icon{position: absolute;right:1%;top:0;}
+.banner nav .icon a{padding: 0 5px;}
+
+/* 头部中间动画部分 */
+.center h2{width: 350px;height: 100px;opacity: 1;border:7px solid #000;line-height: 100px;font-size: 40px;text-transform: uppercase;letter-spacing: 3px;position: absolute;left: 50%;top: 50%;transform:translate(-50%,-50%);text-align: center;transition:all .6s;animation:center 2s ease 1;}
+.center h3{font:21px/80px arial;text-transform: uppercase;letter-spacing: 5px;position: absolute;left: 50%;top: 35%;transform:translate(-50%,-50%);transition:all .6s;animation:center1 2s ease 1;}
+.center h4{font:italic normal 25px/117px "Bell MT";text-transform: capitalize;position: absolute;left: 50%;top: 65%;transform:translate(-50%,-50%);transition:all .6s;animation:center2 2s ease 1;}
+
+@keyframes center{
+	0%{top:-20%;opacity: 0;}
+	100%{top:50%;opacity: 1;}
+}
+@keyframes center1{
+	0%{top:120%;opacity: 0;}
+	100%{top:35%;opacity: 1;}
+}
+@keyframes center2{
+	0%{left:-20%;opacity: 0;}
+	100%{left:50%;opacity: 1;}
+}
+
+/* weareOshine部分 */
+.weOshine{position: relative;font-size: 0;}
+.weOshine p{font: 15px/33px "Century Gothic";padding: 1% 20% 7%;color: #5f6263;}
+.weOshine .pic {display: inline-block;font-size: 0;}
+.weOshine .pic img{width: 100%;height: 100%;}
+.weOshine nav {font-size: 0;}
+.weOshine nav a{display: inline-block;width: 25%;height: 246px;font-size: 15px;color: #000;position: relative;}
+.weOshine nav a:nth-child(2n+1){background-color: #f2f5f8;}
+.weOshine nav a:nth-child(2n){background-color: #edf0f2;}
+.weOshine nav .pic{position: absolute;left: 50%;top:50%;transform: translate(-50%,-50%);transition:.5s;}
+.weOshine nav a h4{font-size: 15px;width: 200px;padding-top: 5%;}
+.weOshine nav .pic img{width: 43px;}
+.weOshine nav a:hover .pic{transform: translate(-50%,-110%);}
+
+/* morden部分 */
+.morden {margin-bottom: 5%;}
+.morden .left{width: 33%;margin-top: 7%;float: left;}
+.morden .left li{display: inline-block;position: relative;}
+.morden .left ul li h2{font:bold 15px/53px arial;color: #222;}
+.morden .left .text{padding-left: 35%;}
+.morden .left ul li i{font-size: 30px;position: absolute;left: 20%;top:0;color: #e2ad76;display: inline-block;line-height: 53px;}
+.morden .left ul li p{font: 11px/26px arial;color: #6c6f7f;padding-bottom: 10%;}
+.morden .mid{width: 33%;float: left;text-align: center;margin-top: 7%;}
+.morden .mid img{width: 70%;}
+
+/* 固定背景部分 */
+.bg{height: 400px;background: url(../images/wanderlust01.jpg) no-repeat center center/ cover fixed;}
+
+
+/* our work部分 */
+.weOshine,.ourWork,.client {text-align: center;}
+.weOshine h2,.ourWork h2,.client h2{padding: 5% 0 2%;font-size: 30px;}
+.weOshine h3,.ourWork h3,.client h3{color:#555;font-family: "Bell MT";font-size: 20px;padding: 1% 0;font-weight: normal;}
+.weOshine .dot,.ourWork .dot,.client .dot{width: 90px;height: 14px;position: relative;text-align: center;display: inline-block;margin: 1.5% 0;}
+.weOshine .dot:before,.ourWork .dot:before,.client .dot:before{content: "";height: 1px;width: 20px;background-color: #aaa;position: absolute;left: 0;top:70%;}
+.weOshine .dot:after,.ourWork .dot:after,.client .dot:after{content: "";height: 1px;width: 20px;background-color: #aaa;position: absolute;right: 0;top:70%;}
+.weOshine .dot span,.ourWork .dot span,.client .dot span{display: inline-block;width: 10px;height: 10px;margin: 2px 0;background-color: #e0a240;transform:rotate(45deg);}
+.ourWork nav{margin: 1% 0;}
+.ourWork nav a{display: inline-block;color: #000;font:15px/42px arial;text-transform: uppercase;border:1px solid #fff;padding: 0 20px;margin:0 5px;transition:all .5s;}
+.ourWork nav a:hover{color: #e0a240;border:1px solid #e0a240;}
+.ourWork nav .active{color: #e0a240;border:1px solid #e0a240;}
+
+.ourWork section a{width: 30%;display: inline-block;font-size: 0;margin: 1%;position: relative;transition:1s;overflow: hidden;}
+.ourWork section a img{width: 100%;height: 100%;}
+.ourWork section a:before{content: "";width:700px;height:700px;border:300px solid #000;opacity: 0;position: absolute;left: 50%;top:50%;transform: translate(-50%,-50%) rotate(0deg);background: rgba(0,0,0,.5);transition:1s;}
+.ourWork section a:hover:before{content: "";width: 0;height: 0;opacity: .5;transform:translate(-50%,-50%) rotate(360deg);}
+.ourWork section a span{position: absolute;left: 50%;top:-20%;transform: translate(-50%,-50%);color: #fff;z-index: 1;font-size: 20px;width: 100%;line-height: 40px;display: block;height: 50px;transition:1s;}
+.ourWork section a:hover span{top:50%;}
+.ourWork .btn{width: 158px;height: 44px;border:2px solid #000;text-align: center;line-height: 44px;display: inline-block;margin: 2% 0 6%;cursor:pointer ;transition:.5s;font-size: 13px;}
+.ourWork .btn:hover{color: #fff;background-color: #f0b452;border:2px solid #f0b452;}
+
+/* twitter推广部分 */
+.tw{text-align: center;background-color: #f2f3f8;}
+.tw i{color: #dfdfdf;font-size: 80px;margin: 5% 0 1%;}
+.tw p{font:14px/40px arial;color: #6d6a66;padding: 0 5%;}
+.tw a{color: #e3a25e;}
+.tw span{clear: #000;font-weight: bold;text-transform: uppercase;}
+.tw .copy{padding-bottom: 5%;}
+
+/* client部分 */
+.client .dot{margin-bottom:5% ;}
+.client .pic a{width: 45%;display:inline-block;font-size: 0;margin: 0 2% 5%;}
+.client .pic a img{width: 100%;}
+
+/* getIn部分 */
+.getIn{background: url(../images/bg1.jpg) repeat;text-align: center;}
+.getIn h2{color: #fff;font-size: 23px;padding-top: 5%;}
+.getIn p{color: #faf1dd;line-height: 84px;font-size: 15px;}
+.getIn .btn{color: #fff;display: inline-block;width: 110px;height: 44px;background-color: #f0b452;line-height: 44px;transition:.5s;font-size: 15px;margin-bottom: 6%;}
+.getIn .btn:hover{background-color: #000;}
+
+/* footer部分 */
+footer .top{background-color: #f2f3f8;}
+footer .top .left{width: 20%;display: inline-block;margin: 5% 0 10% 4%;}
+footer .top .left .pic{width: 117px;height: 50px;margin-bottom: 32px;}
+footer .top .left .pic img{width: 100%;}
+footer .top .left  p{font:11px/24px arial;color: #838383;padding-bottom: 28px;}
+footer .top .left .icon{}
+footer .top .left .icon .tu{width: 29px;height: 29px;border:1px solid #e0a240;border-radius: 50%;text-align: center;line-height: 29px;transition:.5s;float: left;margin-right: 13px;}
+footer .top .left .icon i{color: #e0a240;}
+footer .top .left .icon .tu:hover{background-color: #e0a240;}
+footer .top .left .icon .tu:hover i{color: #fff;}
+
+
+
+footer .bot{line-height: 70px;color: #959595;font-size: 13px;text-align: center;}
+
+
+
+

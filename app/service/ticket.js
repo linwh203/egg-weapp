@@ -1,17 +1,17 @@
 'use strict';
 const Service = require('egg').Service;
 
-const appid = 'wx6aae799fac854bd0';
-const secret = '5ceea40d33351e675483aaa1ea08839a';
-const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appid}&secret=${secret}`;
+const api = {
+  js_ticket: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket',
+};
 
 class TicketService extends Service {
-  async getTicket() {
+  async getTicket(token) {
     const data = await this.ctx.model.Ticket.findOne({
-      name: 'access_token',
+      name: 'js_ticket',
     }).exec();
     if (!this.isValid(data)) {
-      const newData = await this.fetchTicket();
+      const newData = await this.fetchTicket(token);
       await this.saveTicket(newData);
       return newData;
       /* eslint-disable */
@@ -20,27 +20,25 @@ class TicketService extends Service {
       /* eslint-enable */
     }
   }
-  async saveTicket(ticket) {
+  async saveTicket(data) {
     const Ticket = this.ctx.model.Ticket;
-    let token = await Ticket.findOne({
-      name: 'access_token',
+    let info = await Ticket.findOne({
+      name: 'js_ticket',
     }).exec();
-    if (token) {
-      token.access_token = ticket.access_token;
-      token.expires_in = ticket.expires_in;
+    if (info) {
+      info.ticket = data.ticket;
+      info.expires_in = data.expires_in;
     } else {
-      token = new Ticket({
-        name: 'access_token',
-        access_token: ticket.access_token,
-        expires_in: ticket.expires_in,
+      info = new Ticket({
+        name: 'js_ticket',
+        ticket: data.ticket,
+        expires_in: data.expires_in,
       });
     }
-    token.save(ticket);
+    info.save(data);
   }
-  async updateTicket(ticket) {
-    this.ctx.model.Ticket.update(ticket);
-  }
-  async fetchTicket() {
+  async fetchTicket(token) {
+    const url = `${api.js_ticket}?access_token=${token}&type=jsapi`;
     try {
       const data = await this.ctx.curl(url, {
         // 自动解析 JSON response
@@ -48,12 +46,12 @@ class TicketService extends Service {
         // 3 秒超时
         timeout: 3000,
       });
-      const ticket = data.data;
+      const info = data.data;
       const now = (new Date().getTime());
-      const expiresIn = now + (ticket.expires_in + 20) * 1000;// 20秒缓冲期
-      ticket.expires_in = expiresIn;
+      const expiresIn = now + (info.expires_in + 20) * 1000;// 20秒缓冲期
+      info.expires_in = expiresIn;
 
-      return ticket;
+      return info;
     } catch (error) {
       console.log(error);
     }
