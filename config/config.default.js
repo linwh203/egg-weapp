@@ -5,6 +5,20 @@ module.exports = appInfo => {
     url: 'mongodb://127.0.0.1:27017/weapp',
     options: {},
   };
+
+  exports.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true,
+    },
+    domainWhiteList: [ '*' ],
+  };
+
+  exports.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+
   const config = exports;
 
   // use for cookie sign key, should change to your own and keep security
@@ -12,19 +26,6 @@ module.exports = appInfo => {
 
   // add your config here
   config.middleware = [];
-
-  config.security = {
-    csrf: {
-      enable: false,
-      ignoreJSON: true,
-    },
-    domainWhiteList: '*',
-  };
-
-  config.cors = {
-    origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
-  };
 
   return config;
 };
